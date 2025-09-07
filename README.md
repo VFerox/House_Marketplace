@@ -12,6 +12,9 @@ Käyttäjä pystyy alkuun:
 
 - Näkemään myytyjä asuntoja
 
+- Näkemään saatavilla olevia asuntoja
+
 - Tekemään oman käyttäjän sivulle
 
 - Tekemään joko ostaja käyttäjän tai myyjä käyttäjän
+
