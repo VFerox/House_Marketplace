@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create account</h2>
+{% if error %}<div>{{ error }}</div>{% endif %}
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <p>
+    <label>Username</label><br>
+    <input type="text" name="username" maxlength="10" required>
+  </p>
+  <p>
+    <label>Password</label><br>
+    <input type="password" name="password" maxlength="20" required>
+  </p>
+  <p><button type="submit">Create account</button></p>
+</form>
+{% endblock %}
