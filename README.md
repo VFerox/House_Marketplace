@@ -44,7 +44,7 @@ Seuraavaan välipalautukseen tarkoituksena lisätä,
 
 - Tarjouksien antaminen
 
-- 
+
 
 
 
