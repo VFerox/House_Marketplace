@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ row['title'] }}</h2>
+<div>{{ row['location'] }} · by {{ row['username'] }} · {{ row['created_at'] }}</div>
+<p>{{ row['description'] }}</p>
+{% if owner %}
+<form method="get" action="{{ url_for('house_edit', house_id=row['id']) }}" style="display:inline">
+  <button type="submit">Edit</button>
+</form>
+<form method="post" action="{{ url_for('house_delete', house_id=row['id']) }}" style="display:inline">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button type="submit">Delete</button>
+</form>
+{% endif %}
+{% endblock %}

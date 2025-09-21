@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>My listings</h2>
+<h2>All listings</h2>
+<form method="get" action="{{ url_for('houses') }}">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search title or location">
+  <button type="submit">Search</button>
+</form>
 {% if rows %}
 <ul>
   {% for row in rows %}
   <li>
     <h3><a href="{{ url_for('house_detail', house_id=row['id']) }}">{{ row['title'] }}</a></h3>
-    <div>{{ row['location'] }} · {{ row['created_at'] }}</div>
+    <div>{{ row['location'] }} · by {{ row['username'] }} · {{ row['created_at'] }}</div>
     <p>{{ row['description'][:180] }}{% if row['description']|length > 180 %}...{% endif %}</p>
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p>No listings yet.</p>
+<p>No listings.</p>
 {% endif %}
 {% endblock %}
