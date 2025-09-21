@@ -18,3 +18,37 @@ Käyttäjä pystyy alkuun:
 
 - Tekemään joko ostaja käyttäjän tai myyjä käyttäjän
 
+
+
+# 21.9.2025 Välipalautus 2
+
+Käyttäjä pystyy:
+
+- Rekisteröimään käyttäjän
+
+- Kirjautumaan sisään
+
+- Listaamaan asunnon
+
+- Etsimään asuntoja
+
+- Muokkaamaan listauksia ja poistattaa niitä
+
+Seuraavaan välipalautukseen tarkoituksena lisätä,
+
+- Kuvat listauksiin
+
+- Parantaa sivun ulkonäköä jos ehdin
+
+- Laittaa hinnan listauksiin
+
+- Tarjouksien antaminen
+
+- 
+
+
+
+
+
+
+
