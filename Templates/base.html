@@ -1,19 +1,20 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>House Auctionhouse</title>
+  <meta charset="utf-8">
+  <title>House Marketplace</title>
 </head>
 <body>
 <header>
   <nav>
     <a href="{{ url_for('index') }}">Home</a>
-    <a href="{{ url_for('houses') }}">Listings</a>
+    <a href="{{ url_for('listings_page') }}">Listings</a>
     {% if session.get('user_id') %}
+      <a href="{{ url_for('listing_new') }}">New listing</a>
       <a href="{{ url_for('my_listings') }}">My listings</a>
-      <a href="{{ url_for('house_new') }}">New listing</a>
+      <a href="{{ url_for('user_page', user_id=session.get('user_id')) }}">My page</a>
       <form action="{{ url_for('logout') }}" method="post" style="display:inline">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <button type="submit">Logout {{ session.get('username') }}</button>
       </form>
     {% else %}
