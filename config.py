@@ -1,1 +1,1 @@
-secret_key = "supersecretkey!asd123"
+secret_key = "kdfjgdfojg94383904mgf34"
