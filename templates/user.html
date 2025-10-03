@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User: {{ user['username'] }}</h2>
+<p>Joined: {{ user['created_at'] }}</p>
+
+<h3>Stats</h3>
+<ul>
+  <li>Total listings: {{ listing_stats['total'] }}</li>
+  <li>First listing: {{ listing_stats['first_created'] }}</li>
+  <li>Latest listing: {{ listing_stats['last_created'] }}</li>
+  <li>Total inquiries sent: {{ inquiry_total }}</li>
+</ul>
+
+<h3>Listings</h3>
+{% if user_listings %}
+<ul>
+  {% for row in user_listings %}
+  <li>
+    <a href="{{ url_for('listing_detail', listing_id=row['id']) }}">{{ row['title'] }}</a>
+    — {{ row['location'] }} · €{{ row['price_eur'] }} · {{ row['created_at'] }}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No listings.</p>
+{% endif %}
+{% endblock %}
