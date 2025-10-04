@@ -1,15 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>{{ row['title'] }}</h2>
-<div>{{ row['location'] }} · by {{ row['username'] }} · {{ row['created_at'] }}</div>
+<div>{{ row['location'] }} · €{{ row['price_eur'] }} · by <a href="{{ url_for('user_page', user_id=row['user_id']) }}">{{ row['username'] }}</a> · {{ row['created_at'] }}</div>
 <p>{{ row['description'] }}</p>
+
+{% if cats %}
+<p>
+  <strong>Categories:</strong>
+  {% for c in cats %}
+    {{ c['name'] }}{% if not loop.last %}, {% endif %}
+  {% endfor %}
+</p>
+{% endif %}
+
+<section>
+  <h3>Pictures</h3>
+  <p>No pictures</p>
+</section>
+
 {% if owner %}
-<form method="get" action="{{ url_for('house_edit', house_id=row['id']) }}" style="display:inline">
+<form method="get" action="{{ url_for('listing_edit', listing_id=row['id']) }}" style="display:inline">
   <button type="submit">Edit</button>
 </form>
-<form method="post" action="{{ url_for('house_delete', house_id=row['id']) }}" style="display:inline">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<form method="post" action="{{ url_for('listing_delete', listing_id=row['id']) }}" style="display:inline">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   <button type="submit">Delete</button>
 </form>
+{% elif session.get('user_id') %}
+<h3>Ask more about this listing</h3>
+{% if error %}<div>{{ error }}</div>{% endif %}
+<form method="post" action="{{ url_for('listing_inquiry', listing_id=row['id']) }}">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <p>
+    <label>Message</label><br>
+    <textarea name="content" rows="4" maxlength="1000" required></textarea>
+  </p>
+  <p><button type="submit">Send</button></p>
+</form>
+{% else %}
+<p>Login to send a message about this listing.</p>
+{% endif %}
+
+<h3>Inquiries</h3>
+{% if inquiries %}
+<ul>
+  {% for i in inquiries %}
+  <li>
+    <div>{{ i['content'] }}</div>
+    <div>by <a href="{{ url_for('user_page', user_id=i['user_id']) }}">{{ i['username'] }}</a> · {{ i['sent_at'] }}</div>
+    {% if session.get('user_id') == i['user_id'] %}
+    <form method="post" action="{{ url_for('inquiry_delete', inquiry_id=i['id']) }}" style="display:inline">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <button type="submit">Delete</button>
+    </form>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No inquiries.</p>
 {% endif %}
 {% endblock %}

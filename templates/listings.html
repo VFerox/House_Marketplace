@@ -1,21 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>All listings</h2>
-<form method="get" action="{{ url_for('houses') }}">
-  <input type="text" name="q" value="{{ q }}" placeholder="Search title or location">
-  <button type="submit">Search</button>
+<h2>New listing</h2>
+{% if error %}<div>{{ error }}</div>{% endif %}
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <p>
+    <label>Title</label><br>
+    <input type="text" name="title" maxlength="80" required>
+  </p>
+  <p>
+    <label>Location</label><br>
+    <input type="text" name="location" maxlength="80" required>
+  </p>
+  <p>
+    <label>Price (EUR)</label><br>
+    <input type="number" name="price_eur" min="1" required>
+  </p>
+  <p>
+    <label>Description</label><br>
+    <textarea name="description" rows="6" maxlength="2000" required></textarea>
+  </p>
+  <fieldset>
+    <legend>Categories</legend>
+    {% for c in cats %}
+    <label style="display:block">
+      <input type="checkbox" name="category_ids" value="{{ c['id'] }}"> {{ c['name'] }}
+    </label>
+    {% endfor %}
+  </fieldset>
+  <p><button type="submit">Create</button></p>
 </form>
-{% if rows %}
-<ul>
-  {% for row in rows %}
-  <li>
-    <h3><a href="{{ url_for('house_detail', house_id=row['id']) }}">{{ row['title'] }}</a></h3>
-    <div>{{ row['location'] }} · by {{ row['username'] }} · {{ row['created_at'] }}</div>
-    <p>{{ row['description'][:180] }}{% if row['description']|length > 180 %}...{% endif %}</p>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No listings.</p>
-{% endif %}
+
+<section>
+  <h3>Pictures</h3>
+  <p>Picture upload will be added later.</p>
+</section>
 {% endblock %}

@@ -3,7 +3,7 @@
 <h2>New listing</h2>
 {% if error %}<div>{{ error }}</div>{% endif %}
 <form method="post">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   <p>
     <label>Title</label><br>
     <input type="text" name="title" maxlength="80" required>
@@ -13,9 +13,26 @@
     <input type="text" name="location" maxlength="80" required>
   </p>
   <p>
+    <label>Price (EUR)</label><br>
+    <input type="number" name="price_eur" min="1" required>
+  </p>
+  <p>
     <label>Description</label><br>
     <textarea name="description" rows="6" maxlength="2000" required></textarea>
   </p>
+  <fieldset>
+    <legend>Categories</legend>
+    {% for c in cats %}
+    <label style="display:block">
+      <input type="checkbox" name="category_ids" value="{{ c['id'] }}"> {{ c['name'] }}
+    </label>
+    {% endfor %}
+  </fieldset>
   <p><button type="submit">Create</button></p>
 </form>
+
+<section>
+  <h3>Pictures</h3>
+  <p>Picture upload will be added later.</p>
+</section>
 {% endblock %}
