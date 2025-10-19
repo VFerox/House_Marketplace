@@ -5,7 +5,7 @@
 <ul>
   {% for row in rows %}
   <li>
-    <h3><a href="{{ url_for('house_detail', house_id=row['id']) }}">{{ row['title'] }}</a></h3>
+    <h3><a href="{{ url_for('listing_detail', listing_id=row['id']) }}">{{ row['title'] }}</a></h3>
     <div>{{ row['location'] }} · {{ row['created_at'] }}</div>
     <p>{{ row['description'][:180] }}{% if row['description']|length > 180 %}...{% endif %}</p>
   </li>
