@@ -54,6 +54,7 @@ def init_db():
     create_tables()
 
 
+
 def require_login():
     if "user_id" not in session:
         abort(403)
