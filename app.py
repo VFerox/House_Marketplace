@@ -46,14 +46,13 @@ def create_tables():
         "content TEXT NOT NULL, "
         "sent_at TEXT NOT NULL)"
     )
-    rows = db.query("SELECT id FROM categories LIMIT 1")
-    if not rows:
-        for n in ["Apartment", "House", "Studio", "Townhouse", "Villa"]:
-            db.execute("INSERT INTO categories (name) VALUES (?)", [n])
+    for n in ["Apartment", "House", "Studio", "Townhouse", "Villa"]:
+        db.execute("INSERT OR IGNORE INTO categories (name) VALUES (?)", [n])
 
 @app.before_request
-def before_request():
+def init_db():
     create_tables()
+
 
 def require_login():
     if "user_id" not in session:
@@ -109,6 +108,7 @@ def logout():
 
 @app.route("/listings")
 def listings_page():
+    require_login()
     q = request.args.get("q", "").strip()
     category_id = request.args.get("category_id", "").strip()
     cid = int(category_id) if category_id.isdigit() else None
@@ -143,6 +143,7 @@ def listing_new():
 
 @app.route("/listings/<int:listing_id>")
 def listing_detail(listing_id):
+    require_login()
     row = listings.get_listing(listing_id)
     if not row:
         abort(404)
