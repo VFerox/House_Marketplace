@@ -1,30 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>House Marketplace</title>
+  <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
-<header>
-<nav>
-  <a href="{{ url_for('index') }}">Home</a>
-  {% if session.get('user_id') %}
-    <a href="{{ url_for('listings_page') }}">Listings</a>
-    <a href="{{ url_for('listing_new') }}">New listing</a>
-    <a href="{{ url_for('my_listings') }}">My listings</a>
-    <a href="{{ url_for('user_page', user_id=session.get('user_id')) }}">My page</a>
-    <form action="{{ url_for('logout') }}" method="post" style="display:inline">
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-      <button type="submit">Logout {{ session.get('username') }}</button>
-    </form>
-  {% else %}
-    <a href="{{ url_for('login') }}">Login</a>
-    <a href="{{ url_for('register') }}">Register</a>
-  {% endif %}
-</nav>
-</header>
-<main>
-  {% block content %}{% endblock %}
-</main>
+  <div class="header">
+    <h1>House Marketplace</h1>
+  </div>
+  <div class="nav">
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        {% if session.get('user_id') %}
+          <li><a href="{{ url_for('listings_page') }}">Listings</a></li>
+          <li><a href="{{ url_for('listing_new') }}">New listing</a></li>
+          <li><a href="{{ url_for('my_listings') }}">My listings</a></li>
+          <li><a href="{{ url_for('user_page', user_id=session.get('user_id')) }}">My page</a></li>
+          <li>
+            <form action="{{ url_for('logout') }}" method="post" style="display:inline">
+              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+              <button type="submit">Logout {{ session.get('username') }}</button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
 </body>
 </html>
