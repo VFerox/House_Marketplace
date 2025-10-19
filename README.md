@@ -2,27 +2,28 @@
 
 House MarketPlace on sivusto jossa pystyy ostamaan, myymään ja katsomaan asuntoja.
 
-Käyttäjä pystyy alkuun:
+Käyttäjä pystyy:
 
-- Listaamaan asuntoja
+- Listaamaan asuntoja, villoja, studioita
 
-- Kommenotimaan postauksiin
+- Poistamaan omia listauksia
 
-- Tarjoamaan tarjouksia asunnoista
+- Muokkaamaan omia listauksia
 
-- Näkemään myytyjä asuntoja
+- Kommentoimaan listauksiin omasta tarjouksesta/muusta informaatiosta
 
 - Näkemään saatavilla olevia asuntoja
 
 - Tekemään oman käyttäjän sivulle
 
-- Tekemään joko ostaja käyttäjän tai myyjä käyttäjän
+- Oma profiili missä näkyy tilastoja omista listauksista, kommenteista ja aktiivisuudesta
 
 
 
-# 21.9.2025 Välipalautus 2
 
-Miten käynnistää websovellus,
+
+
+# Miten käynnistää websovellus,
 
 Windows: 
 
@@ -62,28 +63,6 @@ python app.py
 Sitten avaa, http://127.0.0.1:5000
 
 
-
-Käyttäjä pystyy:
-
-- Rekisteröimään käyttäjän
-
-- Kirjautumaan sisään
-
-- Listaamaan asunnon
-
-- Etsimään asuntoja
-
-- Muokkaamaan listauksia ja poistattaa niitä
-
-Seuraavaan välipalautukseen tarkoituksena lisätä,
-
-- Kuvat listauksiin
-
-- Parantaa sivun ulkonäköä jos ehdin
-
-- Laittaa hinnan listauksiin
-
-- Tarjouksien antaminen
 
 
 
